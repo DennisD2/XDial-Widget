@@ -2,9 +2,16 @@
 This is a simple widget showing a gauge with a pointer
 that can be moved (set to values) in some range mix..max.
 
-## Build
-Create Makefile:
+## What is this used for?
+This is intended more or less to test X Windows code development on a
+Sun Blade 100 historical workstation. Code is from around 1995,
+slightly adjusted to OpenBSD 7.8 running on that machine. This 
+machine runs X11R6.
 
+## Build
+I use ancient imake command for build setup.
+
+Create Makefile:
 ```shell
 -bash-5.3$ xmkmf
 mv -f Makefile Makefile.bak
@@ -26,7 +33,7 @@ Create test program:
 -bash-5.3$ ./dial
 ```
 ## Credits
-The code is a small step away from its original source from the Young-book.
+The code is a small step away from some source code from the Young-book.
 
 * *The X Window System : programming and applications with Xt*. Young, Douglas A., Online version,
   https://archive.org/details/xwindowsystempro0000youn
