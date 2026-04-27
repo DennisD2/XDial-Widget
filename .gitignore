@@ -1,3 +1,5 @@
-./dial
+dial
 *.o
 *.a
+/.idea
+*.bak
