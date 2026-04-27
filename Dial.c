@@ -1,18 +1,6 @@
 /*
- *                Copyright 1989 by Douglas A. Young
- *
- *                         All Rights Reserved
- *
- * Permission to use, copy, modify, and distribute this software
- * for any purpose and without fee is hereby granted,
- * provided that the above copyright notice appear in all copies and that
- * both that copyright notice and this permission notice appear in
- * supporting documentation. The author disclaims all warranties with 
- * regard to this software, including all implied warranties of 
- * merchantability and fitness.
- *
- * Comments and additions may be sent the author at:
- *
+ *  Based on code from 1989 by Douglas A. Young
+ *  See chapter 12 of his book, Dial.c code
  *  dayoung@hplabs.hp.com
  */
 
