@@ -32,6 +32,10 @@ Create test program:
 ```shell
 -bash-5.3$ ./dial
 ```
+result should look like this:
+
+![xdial-small.png](xdial-small.png)
+
 ## Credits
 The code is a small step away from some source code from the Young-book.
 
