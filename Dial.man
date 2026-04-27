@@ -1,0 +1,40 @@
+Class Dial
+==========
+The dial widget class implements the visual apperance and interactive
+behaviour of a dial or a gauge. It provides a set of markers, representing
+values, arranged inside a border (usually a circle) and a indicator,
+repesenting the actual value of the dial. The indicator can be selected, thus
+changing the actual value of the dial. For an exact specification of values
+that can be customized, see the resource section.
+
+Resources
+---------
+XtNmarkers 		Number of markers		10
+XtNminimum		Value of first marker		0
+XtNmaximum		Value of last marker		100
+XtNindicatorColor	Color of indicator		Black
+XtNposition		Initial Position of indicator	0
+XtNmarkerLenght		Lenght of markers		5
+XtNforeground		Color of markers		Black
+XtNselect		Select callback			NULL
+
+NEW:
+XtNindicatorType	Type of indicator		line
+			Possible: line, arrow 
+XtNindicatorThickness	Thickness of indicator		1		    x
+XtNmarkerType		Type of markers			line	    	    x
+			Possible: line, point
+XtNmarkerThickness	Thickness of markers		1		    x
+XtNshowMid		Display Point in mid of dial	False		    x
+XtNshowMarkerValues	Display Values at Markers	False
+XtNborderType		Type of border			none    	    x
+			Possible: none, circle,  
+			rectangle
+XtNtitle		Title string for dial		""		    x
+XtNfont			Font used for title string	Fixed		    x
+XtNshowValue		Display actual value of dial	False		    x
+
+Bugs
+----
+The following resources are not yet implemented:
+XtNindicatorType, XtNshowMarkerValues.
