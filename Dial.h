@@ -57,4 +57,4 @@ typedef struct _XsDialRec      * XsDialWidget;
 extern Widget XtCreateDial( Widget parent, char *name, ArgList args,
 	int ArgCount );
 
-#endif DIAL_H
+#endif /*DIAL_H*/

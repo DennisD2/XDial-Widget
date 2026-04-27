@@ -67,4 +67,5 @@ typedef struct _XsDialRec {
 #define BORDER_CIRCLE 1
 #define BORDER_RECTANGLE 2
 
-#endif DIALP_H
+#endif /*DIALP_H*/
+
