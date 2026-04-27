@@ -1,0 +1,16 @@
+DialTest*dial.foreground: red
+DialTest*dial.background: black
+DialTest*dial.indicatorColor: red
+DialTest*dial.showValue: True
+
+DialTest*dial.markers: 25
+DialTest*dial.indicatorThickness: 5
+DialTest*dial.markerThickness: 3
+
+DialTest*dial.showMid: True
+DialTest*dial.midThickness: 15
+
+DialTest*dial.borderType: rectangle
+
+DialTest*dial.title: Altitude
+DialTest*dial.font: Fixed
