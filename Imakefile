@@ -1,18 +1,18 @@
-CC=gcc
+CC = gcc
 
-SRCS = Dial.c Converters.c 
+SRCS = Dial.c Converters.c
 SRCS1 = dial.c
 
-OBJS = Dial.o Converters.o 
+OBJS = Dial.o Converters.o
 OBJS1 = dial.o
 
 INCDIR = .
 DEBUG = -O
-CFLAGS = $(DEBUG) -I$(INCDIR) -Wall
+CFLAGS = $(DEBUG) -I$(INCDIR) -I/usr/X11R6/include -Wall
 
-LDOPTIONS = -L. -static
+LDOPTIONS = -L. -L/usr/X11R6/lib -static
 LOCAL_LIBRARIES = -lDial
-SYS_LIBS = -lXaw -lXt -lX11 -lm
+SYS_LIBS = -lXaw -lXt -lX11 -lm -lxcb -lXau -lXdmcp -lSM -lICE
 LDLIBS = $(LOCAL_LIBRARIES) $(SYS_LIBS)
 
 NormalLibraryTarget(Dial,$(OBJS))
@@ -22,5 +22,5 @@ NormalProgramTarget(dial,dial.o,libDial.a,,)
 DependTarget()
 
 tar:
-	rm -f XDial.tar
-	tar cvf XDial.tar $(SRCS) $(SRCS1) Imakefile *.h *.man *.ad
+        rm -f XDial.tar
+        tar cvf XDial.tar $(SRCS) $(SRCS1) Imakefile *.h *.man *.ad

@@ -8,5 +8,7 @@ that can be moved (set to values) in some range mix..max.
 
 ## Credits
 The code is a small step away from its original source
-from the Young-book
+from the Young-book.
 
+* *The X Window System : programming and applications with Xt*. Young, Douglas A., Online version,
+  https://archive.org/details/xwindowsystempro0000youn
