@@ -22,5 +22,5 @@ NormalProgramTarget(dial,dial.o,libDial.a,,)
 DependTarget()
 
 tar:
-        rm -f XDial.tar
-        tar cvf XDial.tar $(SRCS) $(SRCS1) Imakefile *.h *.man *.ad
+	rm -f XDial.tar
+	tar cvf XDial.tar $(SRCS) $(SRCS1) Imakefile *.h *.man *.ad
