@@ -1,7 +1,6 @@
 /*
  *  Based on code from 1989 by Douglas A. Young
- *  See chapter 12 of his book, Dial.c code
- *  dayoung@hplabs.hp.com
+ *  See chapter 15 of his book, Dial.c code
  */
 
 /********************************************************
@@ -151,8 +150,7 @@ extern void CvtStringToIndicatorType();
 extern void CvtStringToMarkerType();
 extern void CvtStringToBorderType();
 
-static void ClassInitialize () 
-{
+static void ClassInitialize () {
     XtAddConverter(XtRString, XtRIndicatorType, 
         CvtStringToIndicatorType,NULL,0);
     XtAddConverter(XtRString, XtRMarkerType, 
@@ -161,9 +159,7 @@ static void ClassInitialize ()
         CvtStringToBorderType,NULL,0);
 }
 
-static void Initialize (request, new)
-    XsDialWidget request, new;
-{
+static void Initialize (XsDialWidget request, XsDialWidget new) {
   XGCValues values;
   XtGCMask  valueMask;
   /*
@@ -223,9 +219,7 @@ static void Initialize (request, new)
   Resize (new);
 }
 
-static void Destroy (w)
-     XsDialWidget w;
-{
+static void Destroy (XsDialWidget w) {
   XtDestroyGC (w->dial.indicator_GC);
   XtDestroyGC (w->dial.inverse_GC);
   XtDestroyGC (w->dial.dial_GC);
@@ -233,9 +227,7 @@ static void Destroy (w)
   XtRemoveAllCallbacks ( (Widget)w, XtNrelease );
 }
 
-static void Resize (w)
-     XsDialWidget w;
-{
+static void Resize (XsDialWidget w) {
   double    angle, cosine, sine, increment;
   int       i; 
   Position  start_x, start_y;
@@ -269,10 +261,7 @@ static void Resize (w)
  calculate_indicator_pos(w); 
 } 
 
-
-static void calculate_indicator_pos(w)
-     XsDialWidget w;
-{
+static void calculate_indicator_pos(XsDialWidget w) {
   double   normalized_pos, angle;
   Position end_x, end_y;
   /*
@@ -295,12 +284,8 @@ static void calculate_indicator_pos(w)
   w->dial.indicator_y = w->dial.center_y - end_y * cos(angle); 
 } 
 
-static void Redisplay (w, event, region)
-     XsDialWidget  w;
-     XEvent       *event;
-     Region        region;
-{
-  if(w->core.visible){
+static void Redisplay (XsDialWidget w, XEvent *event, Region region) {
+  if(w->core.visible) {
     /*
      * Set the clip masks in all graphics contexts.
      */
@@ -311,14 +296,13 @@ static void Redisplay (w, event, region)
      * Draw the desired border
      */
     if (w->dial.border_type==BORDER_CIRCLE) {
-	XDrawArc( XtDisplay(w), XtWindow(w),
-		w->dial.dial_GC,
-		0,0,
-		w->core.width, w->core.height,
-		0, 360*64 );
-    }
-    else if (w->dial.border_type==BORDER_RECTANGLE) {
-	XDrawRectangle( XtDisplay(w), XtWindow(w),
+	    XDrawArc( XtDisplay(w), XtWindow(w),
+		    w->dial.dial_GC,
+		    0,0,
+		    w->core.width, w->core.height,
+		    0, 360*64 );
+    } else if (w->dial.border_type==BORDER_RECTANGLE) {
+	      XDrawRectangle( XtDisplay(w), XtWindow(w),
                 w->dial.dial_GC,
                 0,0,
                 w->core.width, w->core.height );
@@ -328,37 +312,37 @@ static void Redisplay (w, event, region)
      * Draw the markers used for the dial face.
      */
     if (w->dial.marker_type==MARKER_LINE)
-     XDrawSegments(XtDisplay(w), XtWindow(w),
+      XDrawSegments(XtDisplay(w), XtWindow(w),
                  w->dial.dial_GC, 
                  (XSegment *) w->dial.segments,
                  w->dial.markers);
     else {
-     XArc *tmp;
-     int i,j;
-     tmp = (XArc *) XtMalloc( w->dial.markers * sizeof(XArc) );
-     for ( i=1,j=0;i<w->dial.markers*2;i=i+2,j++) {
-	tmp[j].x = w->dial.segments[i].x ;
-	tmp[j].y = w->dial.segments[i].y ;
-	tmp[j].width = tmp[j].height = w->dial.marker_thickness ;
-	tmp[j].angle1 = 0 ; tmp[j].angle2 = 360*64 ; 
-     }
-     XDrawArcs( XtDisplay(w), XtWindow(w),
-		w->dial.dial_GC, 
-		tmp,
-		j );
+      XArc *tmp;
+      int i,j;
+      tmp = (XArc *) XtMalloc( w->dial.markers * sizeof(XArc) );
+      for ( i=1,j=0;i<w->dial.markers*2;i=i+2,j++) {
+	      tmp[j].x = w->dial.segments[i].x ;
+	      tmp[j].y = w->dial.segments[i].y ;
+	      tmp[j].width = tmp[j].height = w->dial.marker_thickness ;
+	      tmp[j].angle1 = 0 ; tmp[j].angle2 = 360*64 ;
+      }
+      XDrawArcs( XtDisplay(w), XtWindow(w),
+		    w->dial.dial_GC,
+		    tmp,
+		    j );
      XtFree((char*)tmp);
     }
     /*
      * Draw title string if desired 
      */
     if ( strcmp(w->dial.title,"") ) {
-	int x,y,l;
-	l = XTextWidth( w->dial.font, 
-		w->dial.title, strlen(w->dial.title) );
-	x = w->dial.center_x - l/2 ;
-	y = w->core.height - 10 ;
-	XDrawString( XtDisplay(w), XtWindow(w),	w->dial.dial_GC, 
-		x, y, w->dial.title, strlen(w->dial.title) );
+	    int x,y,l;
+	    l = XTextWidth( w->dial.font,
+		    w->dial.title, strlen(w->dial.title) );
+	    x = w->dial.center_x - l/2 ;
+	    y = w->core.height - 10 ;
+	    XDrawString( XtDisplay(w), XtWindow(w),	w->dial.dial_GC,
+		    x, y, w->dial.title, strlen(w->dial.title) );
     }
 
     /*
@@ -368,9 +352,7 @@ static void Redisplay (w, event, region)
  }
 } 
 
-static Boolean SetValues (current, request, new)
-     XsDialWidget current, request, new;
-{
+static Boolean SetValues (XsDialWidget current, XsDialWidget request, XsDialWidget new) {
   XGCValues  values;
   XtGCMask   valueMask;
   Boolean    redraw = FALSE;
@@ -395,7 +377,7 @@ static Boolean SetValues (current, request, new)
    * If the indicator color or background color 
    * has changed, generate the GC's.
    */
- if (new->dial.indicator_color!=current->dial.indicator_color||
+ if (new->dial.indicator_color!=current->dial.indicator_color ||
   new->core.background_pixel != current->core.background_pixel){
     valueMask = GCForeground | GCBackground;
     values.foreground = new->dial.indicator_color;
@@ -432,7 +414,7 @@ static Boolean SetValues (current, request, new)
    * and draw the new one.
    */
   if(redraw_indicator && ! redraw &&
-     XtIsRealized( (Widget)new) && new->core.visible){
+     XtIsRealized( (Widget)new) && new->core.visible) {
     XDrawLine(XtDisplay(current), XtWindow( current),
               current->dial.inverse_GC, 
               current->dial.center_x, 
@@ -440,34 +422,32 @@ static Boolean SetValues (current, request, new)
               current->dial.indicator_x, 
               current->dial.indicator_y);    
     if (current->dial.show_midpoint)
-	XFillArc(XtDisplay(current), XtWindow(current),
-	     current->dial.inverse_GC,
-	     current->dial.center_x - current->dial.midpoint_thickness/2 , 
-             current->dial.center_y - current->dial.midpoint_thickness/2 ,
-	     current->dial.midpoint_thickness, current->dial.midpoint_thickness,
-	     0,360*64 );
-   if (current->dial.show_value) {
-	int x,y,l;
-        char v[10];
+      XFillArc(XtDisplay(current), XtWindow(current),
+        current->dial.inverse_GC,
+        current->dial.center_x - current->dial.midpoint_thickness/2 ,
+        current->dial.center_y - current->dial.midpoint_thickness/2 ,
+        current->dial.midpoint_thickness, current->dial.midpoint_thickness,
+        0,360*64 );
+    if (current->dial.show_value) {
+      int x,y,l;
+      char v[10];
 
-	sprintf( v, "%d", current->dial.position );
-	l = XTextWidth( current->dial.font, 
-		v, strlen(v) );
-	x = current->dial.center_x - l/2 ;
-	y = current->core.height - 20 ;
-	XDrawString( XtDisplay(current), XtWindow(current),
-		current->dial.inverse_GC, 
-		x, y, v, strlen(v) );
-   }
-    
+      sprintf( v, "%d", current->dial.position );
+      l = XTextWidth( current->dial.font,
+            v, strlen(v) );
+      x = current->dial.center_x - l/2 ;
+      y = current->core.height - 20 ;
+      XDrawString( XtDisplay(current), XtWindow(current),
+        current->dial.inverse_GC,
+        x, y, v, strlen(v) );
+    }
+
     draw_indicator(new);
-      } 
+  }
   return (redraw); 
 } 
 
-static void draw_indicator(w)
-     XsDialWidget  w;
-{
+static void draw_indicator(XsDialWidget w) {
     /*
      * Draw the indicator at its current position.
      */
@@ -477,45 +457,41 @@ static void draw_indicator(w)
               w->dial.center_y,   
               w->dial.indicator_x,  
               w->dial.indicator_y);   
-   /*
-    * Draw an middle point if desired
-    */
-   if (w->dial.show_midpoint)
-	XFillArc(XtDisplay(w), XtWindow(w),
-	     w->dial.indicator_GC,
-	     w->dial.center_x - w->dial.midpoint_thickness/2 , 
-             w->dial.center_y - w->dial.midpoint_thickness/2 ,
-	     w->dial.midpoint_thickness, w->dial.midpoint_thickness,
-	     0,360*64 );
+    /*
+     * Draw an middle point if desired
+     */
+    if (w->dial.show_midpoint)
+	    XFillArc(XtDisplay(w), XtWindow(w),
+	      w->dial.indicator_GC,
+	      w->dial.center_x - w->dial.midpoint_thickness/2 ,
+	      w->dial.center_y - w->dial.midpoint_thickness/2 ,
+	      w->dial.midpoint_thickness, w->dial.midpoint_thickness,
+	      0,360*64 );
 
    /*
     * Draw current value as number
     */
    if (w->dial.show_value) {
-	int x,y,l;
-        char v[10];
+	    int x,y,l;
+      char v[10];
 
-	sprintf( v, "%d", w->dial.position );
-	l = XTextWidth( w->dial.font, 
-		v, strlen(v) );
-	x = w->dial.center_x - l/2 ;
-	y = w->core.height - 20 ;
-	XDrawString( XtDisplay(w), XtWindow(w),	w->dial.dial_GC, 
-		x, y, v, strlen(v) );
+	    sprintf( v, "%d", w->dial.position );
+	    l = XTextWidth( w->dial.font, v, strlen(v) );
+	    x = w->dial.center_x - l/2 ;
+	    y = w->core.height - 20 ;
+	    XDrawString( XtDisplay(w), XtWindow(w),	w->dial.dial_GC,
+		    x, y, v, strlen(v) );
    }
 }
 
-static void select_dial (w, event)
-     XsDialWidget      w;
-     XEvent           *event;
-{
+static void select_dial (XsDialWidget w, XEvent *event) {
   Position   pos;
   double     angle;
   int help;
   
   pos = w->dial.position;
   if(event->type == ButtonPress || 
-         event->type == MotionNotify){
+         event->type == MotionNotify) {
     /* 
      * Get the angle in radians.
      */
@@ -530,7 +506,7 @@ static void select_dial (w, event)
     /*  
      * Convert the angle to a position. 
      */ 
-    pos = w->dial.minimum + (angle /              MAX_ANGLE * 
+    pos = w->dial.minimum + (angle / MAX_ANGLE *
 			     (w->dial.maximum - w->dial.minimum));  
   }  
   /*
@@ -540,10 +516,7 @@ static void select_dial (w, event)
   XtCallCallbacks ( (Widget)w, XtNselect, (caddr_t) help); 
 } 
 
-static void drag_dial (w, event)
-     XsDialWidget      w;
-     XEvent           *event;
-{
+static void drag_dial (XsDialWidget w, XEvent *event) {
   Position   pos;
   double     angle;
   int help;
@@ -566,15 +539,14 @@ static void drag_dial (w, event)
     pos = w->dial.minimum + (angle /              MAX_ANGLE * 
 			     (w->dial.maximum - w->dial.minimum));  
      
-  /*
-   * Use the position as the call_data to the callback list. 
-   */  
-  help = (int)pos;
-  XtCallCallbacks ( (Widget)w, XtNselect, (caddr_t) help); 
+    /*
+     * Use the position as the call_data to the callback list.
+     */
+    help = (int)pos;
+    XtCallCallbacks ( (Widget)w, XtNselect, (caddr_t) help);
 }
 
-Widget XtCreateDial( Widget parent, char *name, ArgList args, int argCount )
-{
+Widget XtCreateDial( Widget parent, char *name, ArgList args, int argCount ) {
 	return( XtCreateWidget( name, XsdialWidgetClass,
 			parent, args, argCount ) );
 }
