@@ -2,7 +2,6 @@
  * DialP.h: Private header file for Dial Widget Class
  *****************************************************/
 
-
 #ifndef DIALP_H
 #define DIALP_H
 
@@ -20,7 +19,7 @@ typedef struct _XsDialClassRec{
 extern XsDialClassRec XsdialClassRec;
 
 typedef struct _XsDialPart {
-   int 	     indicator_type;   /* Type of indicator 	 */ 
+   int 	     indicator_type;  /* Type of indicator 	 */
    Pixel     indicator_color;  /* Color of the indicator */
    Dimension indicator_thickness;
    int       marker_type;      /* Type of marker 	 */
@@ -31,7 +30,7 @@ typedef struct _XsDialPart {
    Dimension midpoint_thickness;
    Boolean   show_markervalues;/* draw values of markers */
    int       border_type;      /* Type of borde          */
-   char*     title;	       /* Title of dial          */
+   char*     title;	          /* Title of dial          */
    XFontStruct *font;	       /* Font used for title    */
    Boolean   show_value;       /* Draw current int value */
 
@@ -50,8 +49,8 @@ typedef struct _XsDialPart {
    GC        indicator_GC;
    GC        inverse_GC;
    XPoint    segments[MAXSEGMENTS];
-   XtCallbackList select;    /* callback list          */
-   XtCallbackList release;    /* callback list          */
+   XtCallbackList select;      /* callback list          */
+   XtCallbackList release;     /* callback list          */
 } XsDialPart;
 
 typedef struct _XsDialRec {
