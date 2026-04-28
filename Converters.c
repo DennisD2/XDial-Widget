@@ -1,3 +1,7 @@
+/*
+*  Based on code from 1989 by Douglas A. Young
+ *  See chapter 15 of his book, Dial.c code
+ */
 
 #include <stdio.h>
 #include <X11/IntrinsicP.h>
