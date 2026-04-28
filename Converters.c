@@ -6,10 +6,7 @@
 #include "DialP.h"
 #include "Dial.h"
 
-void CvtStringToIndicatorType( args, nargs, fromVal, toVal)
-     XrmValuePtr args, fromVal, toVal;
-     int        *nargs;
-{
+void CvtStringToIndicatorType( XrmValuePtr args, int *nargs, XrmValuePtr fromVal, XrmValuePtr toVal) {
   static int result;
 
     /*
@@ -21,20 +18,17 @@ void CvtStringToIndicatorType( args, nargs, fromVal, toVal)
    * Convert the string in the fromVal to a int repesenting 
    */
   if (strcmp( (char*)fromVal->addr, Xt_INDICATOR_LINE ) == 0 ) 
-	result= INDICATOR_LINE;
+	  result= INDICATOR_LINE;
   else  if (strcmp( (char*)fromVal->addr, Xt_INDICATOR_ARROW ) == 0 )
-	result= INDICATOR_ARROW;
+	  result= INDICATOR_ARROW;
   else
-	XtStringConversionWarning((char *) fromVal->addr, "IndicatorType" );
+	  XtStringConversionWarning((char *) fromVal->addr, "IndicatorType" );
 
   toVal->size = sizeof(int);
   toVal->addr = (caddr_t) &result;
 } 
 
-void CvtStringToMarkerType( args, nargs, fromVal, toVal)
-     XrmValuePtr args, fromVal, toVal;
-     int        *nargs;
-{
+void CvtStringToMarkerType( XrmValuePtr args, int *nargs, XrmValuePtr fromVal, XrmValuePtr toVal) {
   static int result;
 
     /*
@@ -46,20 +40,17 @@ void CvtStringToMarkerType( args, nargs, fromVal, toVal)
    * Convert the string in the fromVal to a int repesenting 
    */
   if (strcmp( (char*)fromVal->addr, Xt_MARKER_LINE ) == 0 ) 
-	result= MARKER_LINE;
+	  result= MARKER_LINE;
   else  if (strcmp( (char*)fromVal->addr, Xt_MARKER_POINT ) == 0 )
-	result= MARKER_POINT;
+	  result= MARKER_POINT;
   else
-	XtStringConversionWarning((char *) fromVal->addr, "MarkerType" );
+	  XtStringConversionWarning((char *) fromVal->addr, "MarkerType" );
 
   toVal->size = sizeof(int);
   toVal->addr = (caddr_t) &result;
 } 
 
-void CvtStringToBorderType( args, nargs, fromVal, toVal)
-     XrmValuePtr args, fromVal, toVal;
-     int        *nargs;
-{
+void CvtStringToBorderType(XrmValuePtr args, int *nargs, XrmValuePtr fromVal, XrmValuePtr toVal) {
   static int result;
 
     /*
@@ -71,13 +62,13 @@ void CvtStringToBorderType( args, nargs, fromVal, toVal)
    * Convert the string in the fromVal to a int repesenting 
    */
   if (strcmp( (char*)fromVal->addr, Xt_BORDER_NONE ) == 0 ) 
-	result= BORDER_NONE;
+	  result= BORDER_NONE;
   else  if (strcmp( (char*)fromVal->addr, Xt_BORDER_CIRCLE ) == 0 )
-	result= BORDER_CIRCLE;
+	  result= BORDER_CIRCLE;
   else  if (strcmp( (char*)fromVal->addr, Xt_BORDER_RECTANGLE ) == 0 )
-        result= BORDER_RECTANGLE;
+    result= BORDER_RECTANGLE;
   else
-	XtStringConversionWarning((char *) fromVal->addr, "BorderType" );
+	  XtStringConversionWarning((char *) fromVal->addr, "BorderType" );
 
   toVal->size = sizeof(int);
   toVal->addr = (caddr_t) &result;
