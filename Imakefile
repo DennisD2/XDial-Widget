@@ -1,26 +1,36 @@
-CC = gcc
 
-SRCS = Dial.c Converters.c
-SRCS1 = dial.c
+#include <widgets.tmpl>
 
-OBJS = Dial.o Converters.o
-OBJS1 = dial.o
+#XINCS_PATH     = /usr/X11R6/include
+#XLIBS_PATH     = /usr/X11R6/lib
+#XINCS_PATH      = /usr/include
+#XLIBS_PATH      = /usr/lib64
 
-INCDIR = .
-DEBUG = -O
-CFLAGS = $(DEBUG) -I$(INCDIR) -I/usr/X11R6/include -Wall
+CCOPTIONS       =-Wall
+#INCLUDES        +=
 
-LDOPTIONS = -L. -L/usr/X11R6/lib -static
-LOCAL_LIBRARIES = -lDial
-SYS_LIBS = -lXaw -lXt -lX11 -lm -lxcb -lXau -lXdmcp -lSM -lICE
-LDLIBS = $(LOCAL_LIBRARIES) $(SYS_LIBS)
+LDOPTIONS       = -L.
+#LOCAL_LIBRARIES =
+#  EXTRA_DEFINES =
+#DEPLIBS         = $(DEPXLIB)
+SYS_LIBRARIES   += -lWidgets -lm
 
-NormalLibraryTarget(Dial,$(OBJS))
+PROGRAM       	= libWidgets.a dial
 
-NormalProgramTarget(dial,dial.o,libDial.a,,)
+SRCS	      	= Dial.c Converters.o
+SRCS1 		    = dial.c
+
+OBJS          	= Dial.o Converters.o
+OBJS1 		    = dial.o
+
+PROGRAMS        = $(PROGRAM)
+
+all:: install $(PROGRAMS)
+
+NormalLibraryTarget(Widgets,$(OBJS))
+
+NormalProgramTarget(dial,$(OBJS1),,$(LOCAL_LIBRARIES),)
+
+#MakeDistTarget($(SRCS) $(SRCS1) widgets.tmpl Imakefile)
 
 DependTarget()
-
-tar:
-	rm -f XDial.tar
-	tar cvf XDial.tar $(SRCS) $(SRCS1) Imakefile *.h *.man *.ad

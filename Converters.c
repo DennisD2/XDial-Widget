@@ -4,7 +4,7 @@
 #include <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include "DialP.h"
-#include <Dial.h>
+#include "Dial.h"
 
 void CvtStringToIndicatorType( args, nargs, fromVal, toVal)
      XrmValuePtr args, fromVal, toVal;

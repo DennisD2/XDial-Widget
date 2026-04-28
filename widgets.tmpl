@@ -1,0 +1,24 @@
+/* 
+ * Imake template and rules
+ */
+
+CC              =   gcc
+CFLAGS          +=  -std=c17
+CDEBUGFLAGS     =   -g
+SYS_LIBRARIES   =   -lXt $(XLIB)
+
+.SUFFIXES:      .cc .C .c .exe
+
+.cc.o:
+	$(CC) $(CFLAGS) -c $*.cc
+
+#ifndef MakeDistTarget
+#define MakeDistTarget(files) 				@@\
+							@@\
+dist::							@@\
+	-for i in files  ; do \				@@\
+	( cd $(ROOT) ; \				@@\
+	  tar ruvf $(DIST_TAR_FILE) CURDIR/$$i ; \	@@\
+	); \						@@\
+	done
+#endif /* MakeDistTarget */
